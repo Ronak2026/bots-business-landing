@@ -20,3 +20,29 @@ Stage Summary:
 - No gradients, no animations, no box shadows - clean professional design
 - Sections: Navbar, Hero, About, Bot Store, BJS Programming, Github Integration, Features Grid, Stats, Testimonials, Screens, Unlimited Functionality, Download CTA, Pricing, FAQ, Contact, Footer
 - Footer is sticky to bottom using min-h-screen flex flex-col layout
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Redesign updates - dark theme only, no box shadows, centered hero, updated pricing, big footer, Inter font only
+
+Work Log:
+- Updated globals.css: removed light mode entirely, set dark theme as default in :root, added box-shadow: none !important globally, font-sans and font-mono both use Inter
+- Updated layout.tsx: added className="dark" to html element to force dark mode
+- Completely rewrote page.tsx with new layout design
+- Hero section: fully centered with Badge + icon label, large typography, trust signals below CTAs
+- Pricing section: fully redesigned with 4 tiers (Starter/Hobby/Business/Enterprise) instead of 9 plans
+- Footer: big agency-style with 6 columns (Brand+newsletter, Product, Resources, Company, Legal), bottom bar with social icons and copyright
+- Removed box shadows from Card, Button, Input components
+- Added global box-shadow: none !important in CSS
+- All sections use proper responsive breakpoints (sm, md, lg, xl)
+- Lint passed, dev server compiling successfully
+
+Stage Summary:
+- Dark-only theme with custom dark palette (slightly tinted blue-black)
+- Zero box shadows across entire website
+- Centered hero with icon badge label
+- 4-tier pricing instead of 9 plans
+- Large agency-style footer with newsletter, 4 link columns, social icons
+- Fully responsive design
+- Inter font family only (both sans and mono)
