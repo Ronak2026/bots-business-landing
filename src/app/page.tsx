@@ -36,7 +36,11 @@ import {
   BookOpen,
   MapPin,
   Heart,
+  Sun,
+  Moon,
+  Menu,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -53,7 +57,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 
 /* ------------------------------------------------------------------ */
@@ -100,10 +103,9 @@ const FEATURES = [
 ];
 
 const STATS = [
+  { value: "4.6", label: "Rating", icon: Star },
   { value: "200K+", label: "Downloads", icon: Download },
-  { value: "4.6", label: "Star Rating", icon: Star },
-  { value: "925+", label: "User Reviews", icon: Users },
-  { value: "100M+", label: "Iterations Served", icon: Zap },
+  { value: "925+", label: "Reviews", icon: Users },
 ];
 
 const TESTIMONIALS = [
@@ -304,6 +306,26 @@ const FOOTER_LINKS = {
 };
 
 /* ------------------------------------------------------------------ */
+/*  THEME TOGGLE COMPONENT                                             */
+/* ------------------------------------------------------------------ */
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+    >
+      <Sun className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    </Button>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  PAGE COMPONENT                                                     */
 /* ------------------------------------------------------------------ */
 
@@ -313,7 +335,7 @@ export default function Home() {
       {/* ============================================================ */}
       {/*  NAVBAR                                                      */}
       {/* ============================================================ */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
@@ -352,8 +374,9 @@ export default function Home() {
               </Button>
             </nav>
 
-            {/* CTA */}
+            {/* CTA + Theme Toggle */}
             <div className="hidden lg:flex items-center gap-2">
+              <ThemeToggle />
               <Button variant="ghost" size="sm" asChild>
                 <a
                   href="https://app.bots.business/?utm_source=bots.business&utm_medium=website&utm_campaign=web-app"
@@ -375,24 +398,13 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Mobile menu */}
-            <Button variant="ghost" size="icon-sm" className="lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
-            </Button>
+            {/* Mobile menu + Theme */}
+            <div className="flex items-center gap-1 lg:hidden">
+              <ThemeToggle />
+              <Button variant="ghost" size="icon" className="lg:hidden">
+                <Menu className="size-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -401,7 +413,7 @@ export default function Home() {
         {/* ============================================================ */}
         {/*  HERO — CENTERED                                             */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 lg:py-44">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
               <Badge variant="secondary" className="mb-6 gap-1.5 px-3 py-1">
@@ -449,20 +461,20 @@ export default function Home() {
                 </Button>
               </div>
 
-              {/* Trust signals */}
-              <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <Star className="size-4 fill-foreground" />
+              {/* Trust signals as Badge + icon */}
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                  <Star className="size-3.5 fill-foreground" />
                   4.6 Rating
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Download className="size-4" />
+                </Badge>
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                  <Download className="size-3.5" />
                   200K+ Downloads
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Users className="size-4" />
+                </Badge>
+                <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                  <Users className="size-3.5" />
                   925+ Reviews
-                </span>
+                </Badge>
               </div>
             </div>
           </div>
@@ -471,7 +483,7 @@ export default function Home() {
         {/* ============================================================ */}
         {/*  ABOUT                                                       */}
         {/* ============================================================ */}
-        <section id="about" className="border-b border-border">
+        <section id="about">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center justify-center w-14 h-14 ring-1 ring-foreground/10 rounded-xl mb-6">
@@ -492,7 +504,7 @@ export default function Home() {
         {/* ============================================================ */}
         {/*  BOT STORE                                                   */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -559,11 +571,11 @@ export default function Home() {
         {/* ============================================================ */}
         {/*  BJS PROGRAMMING                                             */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1 flex justify-center">
-                <Card className="w-full max-w-sm bg-foreground text-primary-foreground ring-0">
+                <Card className="w-full max-w-sm bg-foreground text-primary-foreground border-0">
                   <CardHeader>
                     <div className="flex items-center gap-2">
                       <Terminal className="size-4" />
@@ -622,7 +634,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  GITHUB INTEGRATION                                          */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -687,7 +699,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  FEATURES GRID                                               */}
         {/* ============================================================ */}
-        <section id="features" className="border-b border-border">
+        <section id="features">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
@@ -723,20 +735,22 @@ Bot.sendMessage(
         </section>
 
         {/* ============================================================ */}
-        {/*  STATS                                                       */}
+        {/*  STATS — Badge + Icon format                                 */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-3 gap-5">
               {STATS.map((stat) => (
                 <Card key={stat.label} className="text-center">
-                  <CardContent className="pt-4">
-                    <stat.icon className="size-5 mx-auto mb-3 text-muted-foreground" />
+                  <CardContent className="pt-6 pb-6">
+                    <div className="flex justify-center mb-4">
+                      <Badge variant="secondary" className="gap-1.5 px-3 py-1.5">
+                        <stat.icon className="size-3.5" />
+                        {stat.label}
+                      </Badge>
+                    </div>
                     <div className="text-3xl sm:text-4xl font-bold text-foreground">
                       {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {stat.label}
                     </div>
                   </CardContent>
                 </Card>
@@ -748,7 +762,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  TESTIMONIALS                                                */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
@@ -767,7 +781,7 @@ Bot.sendMessage(
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {TESTIMONIALS.map((testimonial) => (
                 <Card key={testimonial.name}>
-                  <CardContent className="pt-4">
+                  <CardContent className="pt-6">
                     <div className="flex gap-0.5 mb-3">
                       {Array.from({ length: testimonial.rating }).map(
                         (_, i) => (
@@ -781,8 +795,7 @@ Bot.sendMessage(
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       &ldquo;{testimonial.text}&rdquo;
                     </p>
-                    <Separator className="my-4" />
-                    <div className="flex items-center gap-3">
+                    <div className="mt-4 flex items-center gap-3">
                       <div className="size-8 ring-1 ring-foreground/10 rounded-full flex items-center justify-center">
                         <Users className="size-4 text-muted-foreground" />
                       </div>
@@ -800,7 +813,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  UNLIMITED FUNCTIONALITY                                     */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
@@ -858,7 +871,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  PRICING                                                     */}
         {/* ============================================================ */}
-        <section id="pricing" className="border-b border-border">
+        <section id="pricing">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
@@ -901,7 +914,6 @@ Bot.sendMessage(
                     </div>
                   </CardHeader>
                   <CardContent className="flex-1">
-                    <Separator className="mb-4" />
                     <ul className="space-y-2.5">
                       {plan.features.map((feature) => (
                         <li
@@ -950,7 +962,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  FAQ                                                         */}
         {/* ============================================================ */}
-        <section id="faq" className="border-b border-border">
+        <section id="faq">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center mb-14">
               <Badge variant="secondary" className="mb-4 gap-1.5">
@@ -980,7 +992,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  CTA SECTION                                                 */}
         {/* ============================================================ */}
-        <section className="border-b border-border">
+        <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
@@ -1019,7 +1031,7 @@ Bot.sendMessage(
         {/* ============================================================ */}
         {/*  CONTACT                                                     */}
         {/* ============================================================ */}
-        <section id="contact" className="border-b border-border">
+        <section id="contact">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-14">
               <Badge variant="secondary" className="mb-4 gap-1.5">
@@ -1076,7 +1088,7 @@ Bot.sendMessage(
       {/* ================================================================ */}
       {/*  FOOTER — BIG DARK COMPANY FOOTER                                */}
       {/* ================================================================ */}
-      <footer className="bg-card border-t border-border">
+      <footer className="bg-card">
         {/* Main footer content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
@@ -1203,7 +1215,6 @@ Bot.sendMessage(
         </div>
 
         {/* Bottom bar */}
-        <Separator />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
@@ -1211,7 +1222,7 @@ Bot.sendMessage(
                 &copy; {new Date().getFullYear()} Bots.Business. All rights
                 reserved.
               </p>
-              <span className="hidden sm:inline text-border">|</span>
+              <span className="hidden sm:inline text-muted-foreground/30">|</span>
               <p className="text-xs text-muted-foreground flex items-center gap-1.5">
                 <MapPin className="size-3" />
                 Chat Bot Platform as a Service
@@ -1223,7 +1234,7 @@ Bot.sendMessage(
                 Made with <Heart className="size-3 fill-foreground" /> by{" "}
                 <span className="font-semibold text-foreground">xKaiiddo</span>
               </p>
-              <span className="text-border">|</span>
+              <span className="text-muted-foreground/30">|</span>
               <a
                 href="https://play.google.com/store/apps/details?id=bb_app.com.bots.business"
                 target="_blank"
