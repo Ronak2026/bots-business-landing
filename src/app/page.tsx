@@ -4,13 +4,12 @@ import {
   Bot,
   Rocket,
   Code2,
-  Github,
-  Cloud,
+  GitBranch,
+  Download,
   FileCode2,
   Laptop,
   Cog,
   RefreshCw,
-  Download,
   Play,
   Star,
   Users,
@@ -28,18 +27,15 @@ import {
   Shield,
   Clock,
   Layers,
-  HeadphonesIcon,
-  FileText,
-  BookOpen,
-  Tv,
-  MapPin,
-  Phone,
   Send,
   CreditCard,
   Sparkles,
   Boxes,
   Workflow,
   MousePointerClick,
+  BookOpen,
+  MapPin,
+  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -243,19 +239,47 @@ const FOOTER_LINKS = {
     links: [
       { label: "Features", href: "#features" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Bot Store", href: "https://app.bots.business" },
-      { label: "Download", href: "https://play.google.com/store/apps/details?id=bb_app.com.bots.business" },
-      { label: "Web App", href: "https://app.bots.business" },
+      {
+        label: "Bot Store",
+        href: "https://app.bots.business",
+        external: true,
+      },
+      {
+        label: "Download",
+        href: "https://play.google.com/store/apps/details?id=bb_app.com.bots.business",
+        external: true,
+      },
+      {
+        label: "Web App",
+        href: "https://app.bots.business",
+        external: true,
+      },
     ],
   },
   resources: {
     title: "Resources",
     links: [
-      { label: "Help Center", href: "https://help.bots.business" },
-      { label: "BJS Documentation", href: "https://help.bots.business/scenarios-and-bjs" },
-      { label: "Github Integration", href: "https://help.bots.business/git" },
+      {
+        label: "Help Center",
+        href: "https://help.bots.business",
+        external: true,
+      },
+      {
+        label: "BJS Documentation",
+        href: "https://help.bots.business/scenarios-and-bjs",
+        external: true,
+      },
+      {
+        label: "Github Integration",
+        href: "https://help.bots.business/git",
+        external: true,
+      },
       { label: "FAQ", href: "#faq" },
-      { label: "API Reference", href: "https://help.bots.business" },
+      {
+        label: "API Reference",
+        href: "https://help.bots.business",
+        external: true,
+      },
     ],
   },
   company: {
@@ -291,48 +315,45 @@ export default function Home() {
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <a href="#" className="flex items-center gap-2.5">
               <img
                 src="https://bots.business/images/logo.png"
                 alt="Bots.Business"
-                className="h-8 w-8"
+                className="h-7 w-7"
               />
-              <span className="text-lg font-semibold tracking-tight text-foreground">
+              <span className="text-base font-semibold tracking-tight text-foreground">
                 Bots.Business
               </span>
             </a>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-0.5">
               {[
                 { label: "Features", href: "#features" },
                 { label: "Pricing", href: "#pricing" },
                 { label: "FAQ", href: "#faq" },
                 { label: "Contact", href: "#contact" },
               ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
+                <Button key={link.href} variant="ghost" size="sm" asChild>
+                  <a href={link.href}>{link.label}</a>
+                </Button>
               ))}
-              <a
-                href="https://help.bots.business"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
-              >
-                Help
-                <ExternalLink className="h-3 w-3" />
-              </a>
+              <Button variant="ghost" size="sm" asChild>
+                <a
+                  href="https://help.bots.business"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Help
+                  <ExternalLink className="size-3 ml-1" />
+                </a>
+              </Button>
             </nav>
 
             {/* CTA */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               <Button variant="ghost" size="sm" asChild>
                 <a
                   href="https://app.bots.business/?utm_source=bots.business&utm_medium=website&utm_campaign=web-app"
@@ -348,18 +369,18 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Get Started Free
-                  <ArrowRight className="h-4 w-4 ml-1.5" />
+                  Get Started
+                  <ArrowRight className="size-3.5 ml-1" />
                 </a>
               </Button>
             </div>
 
             {/* Mobile menu */}
-            <Button variant="ghost" size="icon" className="lg:hidden">
+            <Button variant="ghost" size="icon-sm" className="lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -383,16 +404,12 @@ export default function Home() {
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 lg:py-44">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-              {/* Label with icon */}
-              <Badge
-                variant="secondary"
-                className="mb-6 text-sm font-medium gap-2 px-3 py-1"
-              >
-                <Zap className="h-3.5 w-3.5" />
+              <Badge variant="secondary" className="mb-6 gap-1.5 px-3 py-1">
+                <Zap className="size-3.5" />
                 Chat Bot Platform as a Service
               </Badge>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] font-heading">
                 Create Your Own
                 <br />
                 Telegram Bot
@@ -412,7 +429,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                   >
                     Get Started Free
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    <ArrowRight className="size-4 ml-1.5" />
                   </a>
                 </Button>
                 <Button
@@ -426,24 +443,24 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Play className="h-4 w-4 mr-2" />
+                    <Play className="size-4 mr-1.5" />
                     Download App
                   </a>
                 </Button>
               </div>
 
               {/* Trust signals */}
-              <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <Star className="h-4 w-4 fill-foreground" />
+                  <Star className="size-4 fill-foreground" />
                   4.6 Rating
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Download className="h-4 w-4" />
+                  <Download className="size-4" />
                   200K+ Downloads
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4" />
+                  <Users className="size-4" />
                   925+ Reviews
                 </span>
               </div>
@@ -457,13 +474,13 @@ export default function Home() {
         <section id="about" className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 border border-border rounded-lg mb-6">
-                <Bot className="h-7 w-7 text-foreground" />
+              <div className="inline-flex items-center justify-center w-14 h-14 ring-1 ring-foreground/10 rounded-xl mb-6">
+                <Bot className="size-7 text-foreground" />
               </div>
               <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
                 Your Bot in Telegram
               </p>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-snug">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-snug font-heading">
                 Create bots through the mobile app or use the website.
                 <br className="hidden sm:block" />
                 Or import the code from Github.
@@ -473,18 +490,17 @@ export default function Home() {
         </section>
 
         {/* ============================================================ */}
-        {/*  BOT STORE + BJS + GITHUB — ALTERNATING LAYOUT              */}
+        {/*  BOT STORE                                                   */}
         {/* ============================================================ */}
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Bot Store */}
               <div>
                 <Badge variant="secondary" className="mb-4 gap-1.5">
-                  <Package className="h-3.5 w-3.5" />
+                  <Package className="size-3.5" />
                   Bot Store
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 font-heading">
                   Install Bot from Bot Store
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -499,19 +515,19 @@ export default function Home() {
                     rel="noopener noreferrer"
                   >
                     Browse Store
-                    <ChevronRight className="h-4 w-4 ml-1" />
+                    <ChevronRight className="size-4 ml-1" />
                   </a>
                 </Button>
               </div>
               <div className="flex justify-center">
-                <Card className="w-full max-w-sm border-border shadow-none">
+                <Card className="w-full max-w-sm">
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center">
-                        <Package className="h-5 w-5" />
+                      <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                        <Package className="size-5" />
                       </div>
                       <div>
-                        <CardTitle className="text-base">Bot Store</CardTitle>
+                        <CardTitle>Bot Store</CardTitle>
                         <CardDescription>
                           Ready-to-use bot templates
                         </CardDescription>
@@ -529,7 +545,7 @@ export default function Home() {
                         key={item}
                         className="flex items-center gap-2 text-sm text-muted-foreground"
                       >
-                        <div className="w-1.5 h-1.5 rounded-full bg-foreground" />
+                        <div className="size-1.5 rounded-full bg-foreground" />
                         {item}
                       </div>
                     ))}
@@ -540,15 +556,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* BJS Programming */}
+        {/* ============================================================ */}
+        {/*  BJS PROGRAMMING                                             */}
+        {/* ============================================================ */}
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="order-2 lg:order-1 flex justify-center">
-                <Card className="w-full max-w-sm bg-foreground text-primary-foreground border-0 shadow-none">
+                <Card className="w-full max-w-sm bg-foreground text-primary-foreground ring-0">
                   <CardHeader>
                     <div className="flex items-center gap-2">
-                      <Terminal className="h-4 w-4" />
+                      <Terminal className="size-4" />
                       <span className="text-xs font-mono text-primary-foreground/60">
                         bjs-example
                       </span>
@@ -571,10 +589,10 @@ Bot.sendMessage(
               </div>
               <div className="order-1 lg:order-2">
                 <Badge variant="secondary" className="mb-4 gap-1.5">
-                  <Code2 className="h-3.5 w-3.5" />
+                  <Code2 className="size-3.5" />
                   Programming
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 font-heading">
                   Bot JavaScript — BJS
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -593,7 +611,7 @@ Bot.sendMessage(
                     rel="noopener noreferrer"
                   >
                     Learn More
-                    <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
+                    <ExternalLink className="size-3.5 ml-1.5" />
                   </a>
                 </Button>
               </div>
@@ -601,16 +619,18 @@ Bot.sendMessage(
           </div>
         </section>
 
-        {/* Github Integration */}
+        {/* ============================================================ */}
+        {/*  GITHUB INTEGRATION                                          */}
+        {/* ============================================================ */}
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <Badge variant="secondary" className="mb-4 gap-1.5">
-                  <Github className="h-3.5 w-3.5" />
+                  <GitBranch className="size-3.5" />
                   Github
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 font-heading">
                   Sync Code with Github
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -625,21 +645,19 @@ Bot.sendMessage(
                     rel="noopener noreferrer"
                   >
                     Learn More
-                    <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
+                    <ExternalLink className="size-3.5 ml-1.5" />
                   </a>
                 </Button>
               </div>
               <div className="flex justify-center">
-                <Card className="w-full max-w-sm border-border shadow-none">
+                <Card className="w-full max-w-sm">
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center">
-                        <Github className="h-5 w-5" />
+                      <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                        <GitBranch className="size-5" />
                       </div>
                       <div>
-                        <CardTitle className="text-base">
-                          Github Integration
-                        </CardTitle>
+                        <CardTitle>Github Integration</CardTitle>
                         <CardDescription>Two-way code sync</CardDescription>
                       </div>
                     </div>
@@ -655,7 +673,7 @@ Bot.sendMessage(
                         key={item}
                         className="flex items-center gap-2 text-sm text-muted-foreground"
                       >
-                        <ChevronRight className="h-3.5 w-3.5" />
+                        <ChevronRight className="size-3.5" />
                         {item}
                       </div>
                     ))}
@@ -673,10 +691,10 @@ Bot.sendMessage(
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
-                <MousePointerClick className="h-3.5 w-3.5" />
+                <MousePointerClick className="size-3.5" />
                 Features
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Powerful Features
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -686,12 +704,12 @@ Bot.sendMessage(
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {FEATURES.map((feature) => (
-                <Card key={feature.title} className="border-border shadow-none">
+                <Card key={feature.title}>
                   <CardHeader>
-                    <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center mb-2">
-                      <feature.icon className="h-5 w-5" />
+                    <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center mb-2">
+                      <feature.icon className="size-5" />
                     </div>
-                    <CardTitle className="text-base">{feature.title}</CardTitle>
+                    <CardTitle>{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -711,12 +729,9 @@ Bot.sendMessage(
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
               {STATS.map((stat) => (
-                <Card
-                  key={stat.label}
-                  className="border-border shadow-none text-center"
-                >
-                  <CardContent className="pt-6">
-                    <stat.icon className="h-5 w-5 mx-auto mb-3 text-muted-foreground" />
+                <Card key={stat.label} className="text-center">
+                  <CardContent className="pt-4">
+                    <stat.icon className="size-5 mx-auto mb-3 text-muted-foreground" />
                     <div className="text-3xl sm:text-4xl font-bold text-foreground">
                       {stat.value}
                     </div>
@@ -737,10 +752,10 @@ Bot.sendMessage(
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
-                <Star className="h-3.5 w-3.5" />
+                <Star className="size-3.5" />
                 Testimonials
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Trusted by Thousands
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -751,17 +766,14 @@ Bot.sendMessage(
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {TESTIMONIALS.map((testimonial) => (
-                <Card
-                  key={testimonial.name}
-                  className="border-border shadow-none"
-                >
-                  <CardContent className="pt-6">
+                <Card key={testimonial.name}>
+                  <CardContent className="pt-4">
                     <div className="flex gap-0.5 mb-3">
                       {Array.from({ length: testimonial.rating }).map(
                         (_, i) => (
                           <Star
                             key={i}
-                            className="h-4 w-4 fill-foreground text-foreground"
+                            className="size-4 fill-foreground text-foreground"
                           />
                         )
                       )}
@@ -771,8 +783,8 @@ Bot.sendMessage(
                     </p>
                     <Separator className="my-4" />
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 border border-border rounded-full flex items-center justify-center">
-                        <Users className="h-4 w-4 text-muted-foreground" />
+                      <div className="size-8 ring-1 ring-foreground/10 rounded-full flex items-center justify-center">
+                        <Users className="size-4 text-muted-foreground" />
                       </div>
                       <span className="text-sm font-medium">
                         {testimonial.name}
@@ -793,10 +805,10 @@ Bot.sendMessage(
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <Badge variant="secondary" className="mb-4 gap-1.5">
-                  <Layers className="h-3.5 w-3.5" />
+                  <Layers className="size-3.5" />
                   Unlimited
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 font-heading">
                   Develop Bots with Unlimited Functionality
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -806,10 +818,10 @@ Bot.sendMessage(
                 </p>
               </div>
               <div className="space-y-4">
-                <Card className="border-border shadow-none">
-                  <CardContent className="pt-6 flex items-start gap-4">
-                    <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center shrink-0">
-                      <Clock className="h-5 w-5" />
+                <Card>
+                  <CardContent className="pt-4 flex items-start gap-4">
+                    <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center shrink-0">
+                      <Clock className="size-5" />
                     </div>
                     <div>
                       <h4 className="text-sm font-semibold">
@@ -822,10 +834,10 @@ Bot.sendMessage(
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="border-border shadow-none">
-                  <CardContent className="pt-6 flex items-start gap-4">
-                    <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center shrink-0">
-                      <Globe className="h-5 w-5" />
+                <Card>
+                  <CardContent className="pt-4 flex items-start gap-4">
+                    <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center shrink-0">
+                      <Globe className="size-5" />
                     </div>
                     <div>
                       <h4 className="text-sm font-semibold">
@@ -844,16 +856,16 @@ Bot.sendMessage(
         </section>
 
         {/* ============================================================ */}
-        {/*  PRICING — FULLY REDESIGNED                                  */}
+        {/*  PRICING                                                     */}
         {/* ============================================================ */}
         <section id="pricing" className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <Badge variant="secondary" className="mb-4 gap-1.5">
-                <CreditCard className="h-3.5 w-3.5" />
+                <CreditCard className="size-3.5" />
                 Pricing
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Simple, Transparent Pricing
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -866,22 +878,20 @@ Bot.sendMessage(
               {PRICING_PLANS.map((plan) => (
                 <Card
                   key={plan.name}
-                  className={`border shadow-none flex flex-col ${
-                    plan.highlight ? "border-foreground" : "border-border"
+                  className={`flex flex-col ${
+                    plan.highlight ? "ring-2 ring-foreground" : ""
                   }`}
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 border border-border rounded-lg flex items-center justify-center">
-                        <plan.icon className="h-4 w-4" />
+                      <div className="size-9 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                        <plan.icon className="size-4" />
                       </div>
                       {plan.highlight && (
-                        <Badge variant="secondary" className="text-xs">
-                          Popular
-                        </Badge>
+                        <Badge variant="secondary">Popular</Badge>
                       )}
                     </div>
-                    <CardTitle className="text-lg mt-3">{plan.name}</CardTitle>
+                    <CardTitle className="mt-3">{plan.name}</CardTitle>
                     <CardDescription>{plan.description}</CardDescription>
                     <div className="mt-3">
                       <span className="text-3xl font-bold">${plan.price}</span>
@@ -898,7 +908,7 @@ Bot.sendMessage(
                           key={feature}
                           className="flex items-start gap-2 text-sm text-muted-foreground"
                         >
-                          <ChevronRight className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+                          <ChevronRight className="size-3.5 mt-0.5 shrink-0" />
                           {feature}
                         </li>
                       ))}
@@ -924,8 +934,8 @@ Bot.sendMessage(
             </div>
 
             <div className="mt-14 text-center max-w-xl mx-auto">
-              <div className="inline-flex items-center justify-center w-10 h-10 border border-border rounded-lg mb-3">
-                <HelpCircle className="h-5 w-5 text-muted-foreground" />
+              <div className="inline-flex items-center justify-center size-10 ring-1 ring-foreground/10 rounded-lg mb-3">
+                <HelpCircle className="size-5 text-muted-foreground" />
               </div>
               <h4 className="text-sm font-semibold">What is an iteration?</h4>
               <p className="text-sm text-muted-foreground mt-1">
@@ -944,10 +954,10 @@ Bot.sendMessage(
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center mb-14">
               <Badge variant="secondary" className="mb-4 gap-1.5">
-                <HelpCircle className="h-3.5 w-3.5" />
+                <HelpCircle className="size-3.5" />
                 FAQ
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Frequently Asked Questions
               </h2>
             </div>
@@ -973,7 +983,7 @@ Bot.sendMessage(
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Ready to Build Your Bot?
               </h2>
               <p className="mt-4 text-muted-foreground text-lg">
@@ -988,7 +998,7 @@ Bot.sendMessage(
                     rel="noopener noreferrer"
                   >
                     Get Started Free
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    <ArrowRight className="size-4 ml-1.5" />
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
@@ -997,7 +1007,7 @@ Bot.sendMessage(
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Download className="h-4 w-4 mr-2" />
+                    <Download className="size-4 mr-1.5" />
                     Download App
                   </a>
                 </Button>
@@ -1013,10 +1023,10 @@ Bot.sendMessage(
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="text-center max-w-2xl mx-auto mb-14">
               <Badge variant="secondary" className="mb-4 gap-1.5">
-                <Mail className="h-3.5 w-3.5" />
+                <Mail className="size-3.5" />
                 Contact
               </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground font-heading">
                 Get in Touch
               </h2>
               <p className="mt-4 text-muted-foreground">
@@ -1025,10 +1035,10 @@ Bot.sendMessage(
             </div>
 
             <div className="grid sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
-              <Card className="border-border shadow-none">
-                <CardContent className="pt-6 flex flex-col items-center text-center gap-2">
-                  <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center">
-                    <Mail className="h-5 w-5" />
+              <Card className="text-center">
+                <CardContent className="pt-4 flex flex-col items-center gap-2">
+                  <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                    <Mail className="size-5" />
                   </div>
                   <h4 className="text-sm font-semibold">Email</h4>
                   <p className="text-xs text-muted-foreground">
@@ -1036,10 +1046,10 @@ Bot.sendMessage(
                   </p>
                 </CardContent>
               </Card>
-              <Card className="border-border shadow-none">
-                <CardContent className="pt-6 flex flex-col items-center text-center gap-2">
-                  <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center">
-                    <Globe className="h-5 w-5" />
+              <Card className="text-center">
+                <CardContent className="pt-4 flex flex-col items-center gap-2">
+                  <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                    <Globe className="size-5" />
                   </div>
                   <h4 className="text-sm font-semibold">Help Center</h4>
                   <p className="text-xs text-muted-foreground">
@@ -1047,10 +1057,10 @@ Bot.sendMessage(
                   </p>
                 </CardContent>
               </Card>
-              <Card className="border-border shadow-none">
-                <CardContent className="pt-6 flex flex-col items-center text-center gap-2">
-                  <div className="w-10 h-10 border border-border rounded-lg flex items-center justify-center">
-                    <MessageSquare className="h-5 w-5" />
+              <Card className="text-center">
+                <CardContent className="pt-4 flex flex-col items-center gap-2">
+                  <div className="size-10 ring-1 ring-foreground/10 rounded-lg flex items-center justify-center">
+                    <MessageSquare className="size-5" />
                   </div>
                   <h4 className="text-sm font-semibold">Telegram</h4>
                   <p className="text-xs text-muted-foreground">
@@ -1064,9 +1074,9 @@ Bot.sendMessage(
       </main>
 
       {/* ================================================================ */}
-      {/*  FOOTER — BIG AGENCY-STYLE                                       */}
+      {/*  FOOTER — BIG DARK COMPANY FOOTER                                */}
       {/* ================================================================ */}
-      <footer className="bg-foreground text-primary-foreground">
+      <footer className="bg-card border-t border-border">
         {/* Main footer content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
@@ -1076,33 +1086,29 @@ Bot.sendMessage(
                 <img
                   src="https://bots.business/images/logo.png"
                   alt="Bots.Business"
-                  className="h-8 w-8 invert"
+                  className="size-8"
                 />
-                <span className="text-lg font-semibold text-primary-foreground">
+                <span className="text-lg font-semibold text-foreground font-heading">
                   Bots.Business
                 </span>
               </div>
-              <p className="text-sm text-primary-foreground/50 leading-relaxed max-w-xs">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                 Chat Bot Platform as a Service. Create powerful Telegram bots
                 with ease — no hosting, no database, no SSL required.
               </p>
 
               {/* Newsletter */}
               <div className="mt-6">
-                <p className="text-sm font-medium text-primary-foreground mb-3">
+                <p className="text-sm font-medium text-foreground mb-3">
                   Stay Updated
                 </p>
                 <div className="flex gap-2">
                   <Input
                     placeholder="Enter your email"
-                    className="bg-primary-foreground/5 border-primary-foreground/10 text-primary-foreground placeholder:text-primary-foreground/30 shadow-none h-9 text-sm"
+                    className="bg-background border-border text-foreground placeholder:text-muted-foreground max-w-[220px]"
                   />
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="shrink-0 shadow-none"
-                  >
-                    <Send className="h-4 w-4" />
+                  <Button variant="outline" size="icon" className="shrink-0">
+                    <Send className="size-4" />
                   </Button>
                 </div>
               </div>
@@ -1110,7 +1116,7 @@ Bot.sendMessage(
 
             {/* Product */}
             <div>
-              <h4 className="text-sm font-semibold text-primary-foreground mb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-4">
                 {FOOTER_LINKS.product.title}
               </h4>
               <ul className="space-y-2.5">
@@ -1118,19 +1124,13 @@ Bot.sendMessage(
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      target={
-                        link.href.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel={
-                        link.href.startsWith("http")
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors inline-flex items-center gap-1"
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                     >
                       {link.label}
-                      {link.href.startsWith("http") && (
-                        <ExternalLink className="h-3 w-3" />
+                      {link.external && (
+                        <ExternalLink className="size-3" />
                       )}
                     </a>
                   </li>
@@ -1140,7 +1140,7 @@ Bot.sendMessage(
 
             {/* Resources */}
             <div>
-              <h4 className="text-sm font-semibold text-primary-foreground mb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-4">
                 {FOOTER_LINKS.resources.title}
               </h4>
               <ul className="space-y-2.5">
@@ -1148,19 +1148,13 @@ Bot.sendMessage(
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      target={
-                        link.href.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel={
-                        link.href.startsWith("http")
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors inline-flex items-center gap-1"
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                     >
                       {link.label}
-                      {link.href.startsWith("http") && (
-                        <ExternalLink className="h-3 w-3" />
+                      {link.external && (
+                        <ExternalLink className="size-3" />
                       )}
                     </a>
                   </li>
@@ -1170,7 +1164,7 @@ Bot.sendMessage(
 
             {/* Company */}
             <div>
-              <h4 className="text-sm font-semibold text-primary-foreground mb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-4">
                 {FOOTER_LINKS.company.title}
               </h4>
               <ul className="space-y-2.5">
@@ -1178,7 +1172,7 @@ Bot.sendMessage(
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
                     </a>
@@ -1189,7 +1183,7 @@ Bot.sendMessage(
 
             {/* Legal */}
             <div>
-              <h4 className="text-sm font-semibold text-primary-foreground mb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-4">
                 {FOOTER_LINKS.legal.title}
               </h4>
               <ul className="space-y-2.5">
@@ -1197,7 +1191,7 @@ Bot.sendMessage(
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.label}
                     </a>
@@ -1209,55 +1203,57 @@ Bot.sendMessage(
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-primary-foreground/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
-                <p className="text-xs text-primary-foreground/40">
-                  &copy; {new Date().getFullYear()} Bots.Business. All rights
-                  reserved.
-                </p>
-                <span className="hidden sm:inline text-primary-foreground/20">
-                  |
-                </span>
-                <p className="text-xs text-primary-foreground/40 flex items-center gap-1.5">
-                  <MapPin className="h-3 w-3" />
-                  Chat Bot Platform as a Service
-                </p>
-              </div>
+        <Separator />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+              <p className="text-xs text-muted-foreground">
+                &copy; {new Date().getFullYear()} Bots.Business. All rights
+                reserved.
+              </p>
+              <span className="hidden sm:inline text-border">|</span>
+              <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                <MapPin className="size-3" />
+                Chat Bot Platform as a Service
+              </p>
+            </div>
 
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://play.google.com/store/apps/details?id=bb_app.com.bots.business"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                >
-                  <Smartphone className="h-4 w-4" />
-                </a>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                >
-                  <Github className="h-4 w-4" />
-                </a>
-                <a
-                  href="https://help.bots.business"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                >
-                  <BookOpen className="h-4 w-4" />
-                </a>
-                <a
-                  href="mailto:support@bots.business"
-                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                >
-                  <Mail className="h-4 w-4" />
-                </a>
-              </div>
+            <div className="flex items-center gap-4">
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                Made with <Heart className="size-3 fill-foreground" /> by{" "}
+                <span className="font-semibold text-foreground">xKaiiddo</span>
+              </p>
+              <span className="text-border">|</span>
+              <a
+                href="https://play.google.com/store/apps/details?id=bb_app.com.bots.business"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Smartphone className="size-4" />
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <GitBranch className="size-4" />
+              </a>
+              <a
+                href="https://help.bots.business"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <BookOpen className="size-4" />
+              </a>
+              <a
+                href="mailto:support@bots.business"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Mail className="size-4" />
+              </a>
             </div>
           </div>
         </div>
