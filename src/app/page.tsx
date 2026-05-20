@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Bot,
   Rocket,
@@ -38,7 +39,7 @@ import {
   Heart,
   Sun,
   Moon,
-  Menu,
+  X,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -330,6 +331,8 @@ function ThemeToggle() {
 /* ------------------------------------------------------------------ */
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* ============================================================ */}
@@ -338,8 +341,32 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2.5">
+            {/* Mobile menu button — LEFT side, hidden on desktop */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex items-center gap-1.5 lg:hidden"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+              <span className="text-sm font-medium">Menu</span>
+            </Button>
+
+            {/* Logo — hidden on mobile */}
+            <a href="#" className="hidden lg:flex items-center gap-2.5">
               <img
                 src="https://bots.business/images/logo.png"
                 alt="Bots.Business"
@@ -374,7 +401,7 @@ export default function Home() {
               </Button>
             </nav>
 
-            {/* CTA + Theme Toggle */}
+            {/* CTA + Theme Toggle — desktop */}
             <div className="hidden lg:flex items-center gap-2">
               <ThemeToggle />
               <Button variant="ghost" size="sm" asChild>
@@ -398,16 +425,95 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Mobile menu + Theme */}
+            {/* Mobile right side — theme toggle only */}
             <div className="flex items-center gap-1 lg:hidden">
               <ThemeToggle />
-              <Button variant="ghost" size="icon" className="lg:hidden">
-                <Menu className="size-5" />
-              </Button>
             </div>
           </div>
         </div>
       </header>
+
+      {/* ============================================================ */}
+      {/*  MOBILE MENU — Full-screen overlay                           */}
+      {/* ============================================================ */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[60] bg-background/95 backdrop-blur-sm lg:hidden">
+          <div className="flex flex-col h-full">
+            {/* Close button */}
+            <div className="flex items-center justify-between h-14 px-4 sm:px-6">
+              <span className="text-sm font-semibold text-foreground">Menu</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="size-5" />
+              </Button>
+            </div>
+
+            {/* Nav links */}
+            <nav className="flex-1 flex flex-col px-4 sm:px-6 pt-4 gap-1">
+              {[
+                { label: "Features", href: "#features" },
+                { label: "Pricing", href: "#pricing" },
+                { label: "FAQ", href: "#faq" },
+                { label: "Contact", href: "#contact" },
+              ].map((link) => (
+                <Button
+                  key={link.href}
+                  variant="ghost"
+                  className="justify-start text-base h-12"
+                  asChild
+                >
+                  <a
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                </Button>
+              ))}
+              <Button variant="ghost" className="justify-start text-base h-12" asChild>
+                <a
+                  href="https://help.bots.business"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Help
+                  <ExternalLink className="size-4 ml-1.5" />
+                </a>
+              </Button>
+            </nav>
+
+            {/* Bottom CTA */}
+            <div className="px-4 sm:px-6 pb-8 flex flex-col gap-3">
+              <Button className="w-full" asChild>
+                <a
+                  href="https://app.bots.business/?utm_source=bots.business&utm_medium=website&utm_campaign=web-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get Started
+                  <ArrowRight className="size-4 ml-1.5" />
+                </a>
+              </Button>
+              <Button variant="outline" className="w-full" asChild>
+                <a
+                  href="https://app.bots.business/?utm_source=bots.business&utm_medium=website&utm_campaign=web-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="flex-1">
         {/* ============================================================ */}
@@ -434,7 +540,7 @@ export default function Home() {
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto" asChild>
+                <Button size="lg" className="sm:w-auto" asChild>
                   <a
                     href="https://app.bots.business/?utm_source=bots.business&utm_medium=website&utm_campaign=web-app"
                     target="_blank"
@@ -447,7 +553,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="sm:w-auto"
                   asChild
                 >
                   <a
